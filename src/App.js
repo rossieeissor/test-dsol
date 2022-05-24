@@ -1,25 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
+import { Routes, Route } from "react-router-dom";
 
-function App() {
+import Navbar from "./routes/navbar/Navbar.component";
+import UsersList from "./routes/users-list/Users-list.component";
+import UserProfile from "./routes/user-profile/User-profile.component";
+import PostsList from "./components/posts-list/Posts-list.component";
+import DetailedPost from "./routes/detailed-post/Detailed-post.component";
+import "./App.css";
+
+export default function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Routes>
+      <Route path="/" element={<Navbar />}>
+        <Route index element={<UsersList />} />
+        <Route path="user" element={<UserProfile />} />
+        <Route path="posts" element={<PostsList />} />
+        <Route path="detailed" element={<DetailedPost />} />
+      </Route>
+    </Routes>
   );
 }
-
-export default App;

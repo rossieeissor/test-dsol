@@ -1,0 +1,44 @@
+.posts-list {
+  border: 1px solid #000000;
+  padding: 15px 60px 30px 55px;
+  margin-bottom: 30px;
+
+  &__title {
+    font-family: "Alegreya Sans SC";
+    font-weight: 500;
+    font-size: 2.2rem;
+    margin-bottom: 15px;
+  }
+
+  &__container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 20px;
+    width: 100%;
+
+    .post {
+      flex: 1 1 auto;
+      border: 1px solid #000000;
+      padding: 15px 35px;
+      width: 180px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
+      &__title {
+        font-size: 1.06rem;
+        cursor: pointer;
+      }
+
+      &__body {
+        width: 95%;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        font-size: 0.75rem;
+        color: rgba(0, 0, 0, 0.41);
+      }
+    }
+  }
+}
