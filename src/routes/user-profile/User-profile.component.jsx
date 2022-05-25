@@ -1,17 +1,17 @@
 import { useContext } from "react";
+
 import { Link } from "react-router-dom";
 
-import PostsList from "../../components/posts-list/Posts-list.component";
-import Button from "../../components/button/button.component";
 import { UsersContext } from "../../context/Users.context";
+
+import PostsList from "../../routes/posts-list/Posts-list.component";
+import Button from "../../components/button/button.component";
 
 import "./user-profile.styles.scss";
 
 export default function UserProfile() {
-  const { currentUser } = useContext(UsersContext);
+  const { currentUser, userLength } = useContext(UsersContext);
   const { username, name, email, phone, website, company } = currentUser;
-
-  const userLength = Object.keys(currentUser).length;
 
   return (
     <>
@@ -41,7 +41,7 @@ export default function UserProfile() {
           </Link>
         </>
       ) : (
-        "User has not chosen"
+        <Link to="/">User has not chosen</Link>
       )}
     </>
   );

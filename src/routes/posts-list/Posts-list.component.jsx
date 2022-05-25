@@ -1,15 +1,17 @@
 import { useContext, useEffect, useState } from "react";
 
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 import { PostContext } from "../../context/Post.context";
 import { UsersContext } from "../../context/Users.context";
+
+import Post from "../../components/post/post.component";
 
 import "./posts-list.styles.scss";
 
 export default function PostsList(props) {
   const navigate = useNavigate();
-  const { currentUser } = useContext(UsersContext);
+  const { currentUser, userLength } = useContext(UsersContext);
   const { setCurrentPost } = useContext(PostContext);
   const [currentUsersPosts, setCurrentUsersPosts] = useState([]);
   const limitedPosts = currentUsersPosts.slice(0, props.quantity);
@@ -29,18 +31,19 @@ export default function PostsList(props) {
       .then(posts => setCurrentUsersPosts(posts));
   }, [currentUser]);
   return (
-    <div className="posts-list">
-      <h2 className="posts-list__title">Posts</h2>
-      <div className="posts-list__container">
-        {(props.quantity ? limitedPosts : currentUsersPosts).map(post => (
-          <div className="post" key={post.id}>
-            <h2 className="post__title" onClick={setPostFromClick} id={post.id}>
-              {post.title}
-            </h2>
-            <p className="post__body">{post.body}</p>
+    <>
+      {userLength ? (
+        <div className="posts-list">
+          <h2 className="posts-list__title">Posts</h2>
+          <div className="posts-list__container">
+            {(props.quantity ? limitedPosts : currentUsersPosts).map(post => (
+              <Post clickHandler={setPostFromClick} key={post.id} post={post} />
+            ))}
           </div>
-        ))}
-      </div>
-    </div>
+        </div>
+      ) : (
+        <Link to="/">User has not chosen</Link>
+      )}
+    </>
   );
 }

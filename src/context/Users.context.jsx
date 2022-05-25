@@ -3,11 +3,13 @@ import { createContext, useEffect, useState } from "react";
 export const UsersContext = createContext({
   users: [],
   currentUser: {},
+  userLength: 0,
 });
 
 export const UsersProvider = ({ children }) => {
   const [users, setUsers] = useState([]);
   const [currentUser, setCurrentUser] = useState({});
+  const userLength = Object.keys(currentUser).length;
 
   useEffect(() => {
     fetch("https://jsonplaceholder.typicode.com/users")
@@ -21,7 +23,7 @@ export const UsersProvider = ({ children }) => {
     if (userFromStorage) setCurrentUser(userFromStorage);
   }, []);
 
-  const value = { users, currentUser, setCurrentUser };
+  const value = { users, currentUser, setCurrentUser, userLength };
   return (
     <UsersContext.Provider value={value}>{children}</UsersContext.Provider>
   );

@@ -6,7 +6,8 @@ export const PostContext = createContext({
 
 export const PostProvider = ({ children }) => {
   const [currentPost, setCurrentPost] = useState({});
-  const value = { currentPost, setCurrentPost };
+  const postLength = Object.keys(currentPost).length;
+  const value = { currentPost, setCurrentPost, postLength };
 
   useEffect(() => {
     const postFromStorage = JSON.parse(localStorage.getItem("currentPost"));

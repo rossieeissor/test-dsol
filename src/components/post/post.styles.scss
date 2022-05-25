@@ -1,0 +1,23 @@
+.post {
+  flex: 1 1 auto;
+  border: 1px solid #000000;
+  padding: 15px 35px;
+  width: 180px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  &__title {
+    font-size: 1.06rem;
+    cursor: pointer;
+  }
+
+  &__body {
+    width: 95%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-size: 0.75rem;
+    color: rgba(0, 0, 0, 0.41);
+  }
+}
