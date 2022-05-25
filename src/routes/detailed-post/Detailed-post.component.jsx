@@ -1,50 +1,49 @@
 import { useEffect, useContext, useState } from "react";
+import СommentInput from "../../components/comment-input/comment-input.component";
+import Button from "../../components/button/button.component";
 
 import { PostContext } from "../../context/Post.context";
+
+import "./detailed-post.styles.scss";
 
 export default function DetailedPost() {
   const { currentPost } = useContext(PostContext);
   const [comments, setComments] = useState([]);
+  const [formIsShown, setFormIsShown] = useState(false);
 
-  const testFunc = () => {
-    fetch("https://jsonplaceholder.typicode.com/comments", {
-      method: "POST",
-      body: JSON.stringify({
-        title: "new comment",
-        body: "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-        postId: 1,
-      }),
-      headers: {
-        "Content-type": "application/json; charset=UTF-8",
-      },
-    })
-      .then(response => response.json())
-      .then(json => console.log(json));
-  };
+  function toogleCommentForm() {
+    setFormIsShown((prev) => !prev);
+  }
 
   useEffect(() => {
     fetch(
       `https://jsonplaceholder.typicode.com/posts/${currentPost.id}/comments`
     )
-      .then(res => res.json())
-      .then(data => setComments(data))
-      .catch(error => console.log(error));
-  }, [currentPost.id]);
+      .then((res) => res.json())
+      .then((data) => setComments(data))
+      .catch((error) => console.log(error));
+  }, [currentPost]);
 
   return (
-    <div>
-      <h2>{currentPost.title}</h2>
-      <p>{currentPost.body}</p>
-      <div>
-        {comments.map(comment => (
-          <div key={comment.id}>
-            <h3>{comment.name}</h3>
-            <p>{comment.email}</p>
-            <p>{comment.body}</p>
+    <div className="detailed">
+      <div className="detailed__post">
+        <h2 className="detailed__title">{currentPost.title}</h2>
+        <p className="detailed__body">{currentPost.body}</p>
+      </div>
+      <div className="detailed__comments">
+        <h3 className="comments__title">comments</h3>
+        {comments.map((comment) => (
+          <div className="comments__item" key={comment.id}>
+            <h3 className="item__name">{comment.name}</h3>
+            <p className="item__email">{comment.email}</p>
+            <p className="item__body">{comment.body}</p>
           </div>
         ))}
       </div>
-      <button onClick={testFunc}>ADD COMMENT</button>
+      <Button onClick={toogleCommentForm}>
+        {formIsShown ? "Hide form" : "Post a comment"}
+      </Button>
+      {formIsShown && <СommentInput />}
     </div>
   );
 }

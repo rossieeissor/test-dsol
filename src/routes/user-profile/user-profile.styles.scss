@@ -32,7 +32,7 @@
 
     .user-info__item {
       flex: 1 1 auto;
-      box-sizing: content-box;
+      box-sizing: border-box;
       outline: 0.5px solid #000000;
       display: flex;
       align-items: center;
@@ -50,26 +50,4 @@
 
 a {
   text-decoration: none;
-}
-
-.all-posts {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 10px 20px;
-  width: 176px;
-  height: 44px;
-  background: #101010;
-  border: 1px solid #0d1e4b;
-  color: #fff;
-  cursor: pointer;
-  font-weight: 600;
-  font-size: 11px;
-  margin-left: 55px;
-
-  &:hover {
-    background-color: white;
-    color: black;
-    border: 1px solid black;
-  }
 }

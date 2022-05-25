@@ -8,8 +8,8 @@ import "./users-list.styles.scss";
 export default function UsersList() {
   const { users, setCurrentUser } = useContext(UsersContext);
 
-  const setUserFromClick = event => {
-    const clickedUser = users.find(user => {
+  const setUserFromClick = (event) => {
+    const clickedUser = users.find((user) => {
       return user.id === Number(event.target.id);
     });
     setCurrentUser(clickedUser);
@@ -17,13 +17,12 @@ export default function UsersList() {
   };
   return (
     <div className="users-list">
-      {users.map(user => (
-        <div className="users-list__item">
+      {users.map((user) => (
+        <div key={user.id} className="users-list__item">
           <div></div>
           <Link
             className="item__link"
             to="/user"
-            key={user.id}
             id={user.id}
             onClick={setUserFromClick}
           >

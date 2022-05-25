@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { Link } from "react-router-dom";
 
 import PostsList from "../../components/posts-list/Posts-list.component";
+import Button from "../../components/button/button.component";
 import { UsersContext } from "../../context/Users.context";
 
 import "./user-profile.styles.scss";
@@ -36,7 +37,7 @@ export default function UserProfile() {
           <PostsList quantity={3} />
 
           <Link to="/posts">
-            <button className="all-posts">Go to all posts</button>
+            <Button>Go to all posts</Button>
           </Link>
         </>
       ) : (
